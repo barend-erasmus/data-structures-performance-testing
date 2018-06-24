@@ -23,9 +23,9 @@ export class BasePerformanceTesting<T> {
             return null;
         }
 
-        const str: string = buffer.toString();
+        const str: string = buffer.toString().replace(/\0/g, '');
 
-        return JSON.parse(str);
+        return JSON.parse(str).value;
     }
 
     private fsRead(index: number): Promise<Buffer> {
@@ -79,7 +79,9 @@ export class BasePerformanceTesting<T> {
     }
 
     protected async insertAtIndex(index: number, obj: T): Promise<void> {
-        await this.fsWrite(JSON.stringify(obj), index);
+        await this.fsWrite(JSON.stringify({
+            value: obj,
+        }), index);
 
         await this.fsSync();
     }
