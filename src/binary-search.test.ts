@@ -21,17 +21,20 @@ describe('BinarySearchPerformanceTesting', () => {
                 (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
         });
 
-        it('', async () => {
-            await performanceTesting.add('bar');
-            await performanceTesting.add('foo');
+        it('should add in order', async () => {
             await performanceTesting.add('hello');
             await performanceTesting.add('world');
-
+            await performanceTesting.add('foo');
+            await performanceTesting.add('bar');
             await performanceTesting.add('john');
+            await performanceTesting.add('doe');
 
             const result: string[] = await performanceTesting.toArray();
 
-            console.log(result);
+            expect(result[0]).to.be.eq('bar');
+            expect(result[1]).to.be.eq('doe');
+            expect(result[2]).to.be.eq('foo');
+            expect(result[3]).to.be.eq('hello');
         });
 
     });

@@ -79,11 +79,23 @@ export class BasePerformanceTesting<T> {
     }
 
     protected async insertAtIndex(index: number, obj: T): Promise<void> {
-        await this.fsWrite(JSON.stringify({
+        let str: string = JSON.stringify({
             value: obj,
-        }), index);
+        });
+
+        str = this.padString(this.dataBlockSize, str);
+
+        await this.fsWrite(str, index);
 
         await this.fsSync();
+    }
+
+    private padString(length: number, str: string): string {
+        while (str.length < length) {
+            str += '\0';
+        }
+
+        return str;
     }
 
 }

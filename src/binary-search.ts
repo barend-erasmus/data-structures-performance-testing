@@ -43,7 +43,7 @@ export class BinarySearchPerformanceTesting<T> extends BasePerformanceTesting<T>
             middleIndex = Math.floor((maxIndex + minIndex) / 2);
         }
 
-        for (let index = middleIndex; index < this.length - 1; index ++) {
+        for (let index = this.length - 1; index >= middleIndex + 1; index--) {
             const value: T = await this.findAtIndex(index);
             await this.insertAtIndex(index + 1, value);
         }
