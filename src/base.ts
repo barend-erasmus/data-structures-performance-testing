@@ -25,6 +25,10 @@ export class BasePerformanceTesting<T> {
 
         const str: string = buffer.toString().replace(/\0/g, '');
 
+        if (!str) {
+            return null;
+        }
+
         return JSON.parse(str).value;
     }
 

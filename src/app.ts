@@ -1,28 +1,64 @@
-// import * as path from 'path';
-// import { BinarySearchPerformanceTesting } from './binary-search';
+import * as fs from 'fs';
+import * as path from 'path';
+import { BinarySearchPerformanceTesting } from './binary-search';
+import { BinaryTreePerformanceTesting } from './binary-tree';
+import { IPerfomanceTesting } from './interfaces/performance-testing';
+import { StandardArrayPerformanceTesting } from './standard-array';
 
-// (async () => {
-//     const performanceTesting: BinarySearchPerformanceTesting<string> = new BinarySearchPerformanceTesting(
-//         20,
-//         path.join(__dirname, 'binary-search.log'),
-//         (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
+(async () => {
+    const binarySearchPerformanceTesting: BinarySearchPerformanceTesting<string> = new BinarySearchPerformanceTesting(
+        50,
+        path.join(__dirname, 'binary-search.log'),
+        (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
 
-//     for (let i = 0; i < 500000; i += 1) {
-//         await performanceTesting.add(i, Math.random().toString());
-//     }
+    const binaryTreePerformanceTesting: BinaryTreePerformanceTesting<string> = new BinaryTreePerformanceTesting(
+        50,
+        path.join(__dirname, 'binary-tree.log'),
+        (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
 
-//     const numberOfRequests: number = 10000;
+    const standardArrayPerformanceTesting: StandardArrayPerformanceTesting<string> = new StandardArrayPerformanceTesting(
+        50,
+        path.join(__dirname, 'standard-array.log'),
+        (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
 
-//     const startTimestamp: Date = new Date();
+    const performanceTestings: Array<IPerfomanceTesting<string>> = [
+        binarySearchPerformanceTesting,
+        binaryTreePerformanceTesting,
+        standardArrayPerformanceTesting,
+    ];
 
-//     for (let i = 0; i < numberOfRequests; i++) {
-//         const r: any = await performanceTesting.search(Math.floor(Math.random() * 500000).toString());
-//     }
+    for (const performanceTesting of performanceTestings) {
+        const entries: string[] = fs
+            .readFileSync(path.join(__dirname, '..', '1000-common-words.txt'), 'utf8')
+            .split('\r\n')
+            .slice(0, 500);
 
-//     const endTimestamp: Date = new Date();
+        const startTimestampAdd: Date = new Date();
 
-//     console.log(`${endTimestamp.getTime() - startTimestamp.getTime()} ms`);
-//     console.log(`${numberOfRequests / ((endTimestamp.getTime() - startTimestamp.getTime()) / 1000)} request per second`);
+        for (const entry of entries) {
+            await performanceTesting.add(entry);
+        }
 
-//     performanceTesting.dispose();
-// })();
+        const endTimestampAdd: Date = new Date();
+
+        console.log(`Add`);
+        console.log(`  ${endTimestampAdd.getTime() - startTimestampAdd.getTime()} ms`);
+        console.log(`  ${entries.length / ((endTimestampAdd.getTime() - startTimestampAdd.getTime()) / 1000)} per second`);
+
+        const numberOfRequests: number = 3000;
+
+        const startTimestampSearch: Date = new Date();
+
+        for (let i = 0; i < numberOfRequests; i++) {
+            const r: any = await performanceTesting.search(entries[Math.floor(Math.random() * entries.length)]);
+        }
+
+        const endTimestampSearch: Date = new Date();
+
+        console.log(`Search`);
+        console.log(`  ${endTimestampSearch.getTime() - startTimestampSearch.getTime()} ms`);
+        console.log(`  ${numberOfRequests / ((endTimestampSearch.getTime() - startTimestampSearch.getTime()) / 1000)} per second`);
+
+        performanceTesting.dispose();
+    }
+})();

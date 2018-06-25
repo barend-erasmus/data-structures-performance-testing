@@ -1,6 +1,7 @@
 import { BasePerformanceTesting } from './base';
+import { IPerfomanceTesting } from './interfaces/performance-testing';
 
-export class BinarySearchPerformanceTesting<T> extends BasePerformanceTesting<T> {
+export class BinarySearchPerformanceTesting<T> extends BasePerformanceTesting<T> implements IPerfomanceTesting<T> {
 
     protected length: number = null;
 
@@ -72,7 +73,7 @@ export class BinarySearchPerformanceTesting<T> extends BasePerformanceTesting<T>
             } else if (this.searchComparator(middleValue, obj) === 0) {
                 return {
                     index: middleIndex,
-                    obj: await this.findAtIndex(middleIndex),
+                    obj: middleValue,
                 };
             } else if (this.searchComparator(middleValue, obj) === 1) {
                 maxIndex = middleIndex - 1;
