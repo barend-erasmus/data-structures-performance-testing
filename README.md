@@ -6,3 +6,6 @@
 | Binary Tree    | 146.02 per second   | 3307.60 per second |
 | Standard Array | 83333.33 per second | 171.30 per second  |
 
+![](https://github.com/barend-erasmus/data-structures-performance-testing/raw/master/images/inserts-per-second.png)
+
+![](https://github.com/barend-erasmus/data-structures-performance-testing/raw/master/images/searches-per-second.png)
