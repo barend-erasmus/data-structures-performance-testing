@@ -1,11 +1,8 @@
 # Data Structures Performance Testing
 
-| Type           | Add                 | Search             |
-| -------------- | ------------------- | ------------------ |
-| Binary Search  | 3.83 per second     | 5454.54 per second |
-| Binary Tree    | 146.02 per second   | 3307.60 per second |
-| Standard Array | 83333.33 per second | 171.30 per second  |
-
-![](https://github.com/barend-erasmus/data-structures-performance-testing/raw/master/images/inserts-per-second.png)
-
-![](https://github.com/barend-erasmus/data-structures-performance-testing/raw/master/images/searches-per-second.png)
+| Type           | Add                 | Search              | Space                   |
+| -------------- | ------------------- | ------------------- | ----------------------- |
+| Binary Search  | 1.77 per second     | 5110.73 per second  | 1000 * 50 = 50 000      |
+| Binary Tree    | 82.21 per second    | 2862.59 per second  | 1000 * 50 = 50 000      |
+| Hash Map       | 389.71 per second   | 22388.05 per second | 1000 * 50 * 5 = 250 000 |
+| Standard Array | 125000 per second   | 98.95 per second    | 1000 * 50 = 50 000      |

@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { BinarySearchPerformanceTesting } from './binary-search';
 import { BinaryTreePerformanceTesting } from './binary-tree';
+import { HashMapPerformanceTesting } from './hash-map';
 import { IPerfomanceTesting } from './interfaces/performance-testing';
 import { StandardArrayPerformanceTesting } from './standard-array';
 
@@ -16,6 +17,11 @@ import { StandardArrayPerformanceTesting } from './standard-array';
         path.join(__dirname, 'binary-tree.log'),
         (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
 
+    const hashMapPerformanceTesting: HashMapPerformanceTesting<string> = new HashMapPerformanceTesting(
+        50,
+        path.join(__dirname, 'hash-map.log'),
+        (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
+
     const standardArrayPerformanceTesting: StandardArrayPerformanceTesting<string> = new StandardArrayPerformanceTesting(
         50,
         path.join(__dirname, 'standard-array.log'),
@@ -24,14 +30,17 @@ import { StandardArrayPerformanceTesting } from './standard-array';
     const performanceTestings: Array<IPerfomanceTesting<string>> = [
         binarySearchPerformanceTesting,
         binaryTreePerformanceTesting,
+        hashMapPerformanceTesting,
         standardArrayPerformanceTesting,
     ];
 
     for (const performanceTesting of performanceTestings) {
+        console.log(performanceTesting.toString());
+
         const entries: string[] = fs
             .readFileSync(path.join(__dirname, '..', '1000-common-words.txt'), 'utf8')
             .split('\r\n')
-            .slice(0, 500);
+            .slice(0, 1000);
 
         const startTimestampAdd: Date = new Date();
 
@@ -60,5 +69,7 @@ import { StandardArrayPerformanceTesting } from './standard-array';
         console.log(`  ${numberOfRequests / ((endTimestampSearch.getTime() - startTimestampSearch.getTime()) / 1000)} per second`);
 
         performanceTesting.dispose();
+
+        console.log(`-----------`);
     }
 })();

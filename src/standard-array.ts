@@ -10,7 +10,7 @@ export class StandardArrayPerformanceTesting<T> extends BasePerformanceTesting<T
         fileName: string,
         protected searchComparator: (a: T, b: T) => any,
     ) {
-        super(dataBlockSize, fileName);
+        super(dataBlockSize, fileName, 'Standard Array');
 
         this.length = 0;
     }

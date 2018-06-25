@@ -7,6 +7,7 @@ export class BasePerformanceTesting<T> {
     constructor(
         protected dataBlockSize: number,
         protected fileName: string,
+        protected name: string,
     ) {
         this.fileDescriptor = fs.openSync(this.fileName, 'w+');
     }
@@ -14,6 +15,10 @@ export class BasePerformanceTesting<T> {
     public dispose(): void {
         fs.closeSync(this.fileDescriptor);
         fs.unlinkSync(this.fileName);
+    }
+
+    public toString(): string {
+        return this.name;
     }
 
     protected async findAtIndex(index: number): Promise<T> {

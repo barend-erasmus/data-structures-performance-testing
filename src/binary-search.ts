@@ -10,7 +10,7 @@ export class BinarySearchPerformanceTesting<T> extends BasePerformanceTesting<T>
         fileName: string,
         protected searchComparator: (a: T, b: T) => any,
     ) {
-        super(dataBlockSize, fileName);
+        super(dataBlockSize, fileName, 'Binary Search');
 
         this.length = 0;
     }

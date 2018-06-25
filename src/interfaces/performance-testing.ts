@@ -6,4 +6,6 @@ export interface IPerfomanceTesting<T> {
 
     search(obj: T): Promise<{ index: number, obj: T }>;
 
+    toString(): string;
+
 }

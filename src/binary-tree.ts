@@ -8,7 +8,7 @@ export class BinaryTreePerformanceTesting<T> extends BasePerformanceTesting<T> i
         fileName: string,
         protected searchComparator: (a: T, b: T) => any,
     ) {
-        super(dataBlockSize, fileName);
+        super(dataBlockSize, fileName, 'Binary Tree');
     }
 
     public async add(obj: T): Promise<void> {
