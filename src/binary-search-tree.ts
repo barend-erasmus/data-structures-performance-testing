@@ -1,14 +1,14 @@
 import { BasePerformanceTesting } from './base';
 import { IPerfomanceTesting } from './interfaces/performance-testing';
 
-export class BinaryTreePerformanceTesting<T> extends BasePerformanceTesting<T> implements IPerfomanceTesting<T> {
+export class BinarySearchTreePerformanceTesting<T> extends BasePerformanceTesting<T> implements IPerfomanceTesting<T> {
 
     constructor(
         dataBlockSize: number,
         fileName: string,
         protected searchComparator: (a: T, b: T) => any,
     ) {
-        super(dataBlockSize, fileName, 'Binary Tree');
+        super(dataBlockSize, fileName, 'Binary Search Tree');
     }
 
     public async add(obj: T): Promise<void> {

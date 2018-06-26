@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { BinarySearchPerformanceTesting } from './binary-search';
-import { BinaryTreePerformanceTesting } from './binary-tree';
+import { BinarySearchTreePerformanceTesting } from './binary-search-tree';
 import { HashMapPerformanceTesting } from './hash-map';
 import { IPerfomanceTesting } from './interfaces/performance-testing';
 import { StandardArrayPerformanceTesting } from './standard-array';
@@ -12,7 +12,7 @@ import { StandardArrayPerformanceTesting } from './standard-array';
         path.join(__dirname, 'binary-search.log'),
         (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
 
-    const binaryTreePerformanceTesting: BinaryTreePerformanceTesting<string> = new BinaryTreePerformanceTesting(
+    const binarySearchTreePerformanceTesting: BinarySearchTreePerformanceTesting<string> = new BinarySearchTreePerformanceTesting(
         50,
         path.join(__dirname, 'binary-tree.log'),
         (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0);
@@ -29,7 +29,7 @@ import { StandardArrayPerformanceTesting } from './standard-array';
 
     const performanceTestings: Array<IPerfomanceTesting<string>> = [
         binarySearchPerformanceTesting,
-        binaryTreePerformanceTesting,
+        binarySearchTreePerformanceTesting,
         hashMapPerformanceTesting,
         standardArrayPerformanceTesting,
     ];
